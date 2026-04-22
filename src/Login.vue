@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const senha = ref('')
+
+const voltar = () => {
+  router.push('/')
+}
 </script>
 
 <template>
@@ -26,6 +32,12 @@ const senha = ref('')
           <button
             class="w-full bg-gradient-to-br from-[#7f535c] to-[#714750] text-[#fff7f7] py-3 px-8 rounded-full font-medium tracking-wide text-center active:scale-95 transition-all">
             Entrar
+          </button>
+
+          <button
+            @click="voltar"
+            class="w-full bg-white border-2 border-[#7f535c] text-[#7f535c] py-3 px-8 rounded-full font-medium tracking-wide text-center active:scale-95 transition-all hover:bg-[#fef2e4]">
+            Voltar para a lista
           </button>
         </div>
       </div>
