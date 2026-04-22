@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+import ModalContribuicao from './ModalContribuicao.vue'
 
 defineProps<{
     id: number,
@@ -8,6 +10,8 @@ defineProps<{
     objetivo: number,
     atual: number,
 }>()
+
+const isModalOpen = ref(false)
 
 const formatarMoeda = (valor: number) => {
   return new Intl.NumberFormat('en-US', {
@@ -20,6 +24,14 @@ const formatarMoeda = (valor: number) => {
 const obterLarguraProgresso = (item: any) => {
   return `${(item.atual / item.objetivo) * 100}%`;
 };
+
+const abrirModal = () => {
+  isModalOpen.value = true
+}
+
+const fecharModal = () => {
+  isModalOpen.value = false
+}
 </script>
 
 <template>
@@ -48,9 +60,15 @@ const obterLarguraProgresso = (item: any) => {
             </div>
 
             <button
+                @click="abrirModal"
                 class="w-full bg-gradient-to-br from-[#7f535c] to-[#714750] text-[#fff7f7] py-4 px-8 rounded-full font-medium tracking-wide text-center active:scale-95 transition-all mt-4">
                 Contribute
             </button>
         </div>
     </div>
+
+    <ModalContribuicao
+        :isOpen="isModalOpen"
+        @close="fecharModal"
+    />
 </template>
