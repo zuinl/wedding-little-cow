@@ -8,6 +8,10 @@ const senha = ref('')
 const voltar = () => {
   router.push('/')
 }
+
+const entrar = () => {
+  router.push('/painel-noivos')
+}
 </script>
 
 <template>
@@ -30,6 +34,7 @@ const voltar = () => {
           </div>
 
           <button
+            @click="entrar"
             class="w-full bg-gradient-to-br from-[#7f535c] to-[#714750] text-[#fff7f7] py-3 px-8 rounded-full font-medium tracking-wide text-center active:scale-95 transition-all">
             Entrar
           </button>

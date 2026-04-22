@@ -50,7 +50,7 @@ const objetivosPublicos = ref([
 
 <template>
   <div class="min-h-screen bg-[#fff8f3] text-[#393125] font-sans selection:bg-[#fcc3ce] selection:text-[#643c45]">
-    <Cabecalho nome-noivo1="Leonardo" nome-noivo2="Lucas" />
+    <Cabecalho nome-noivo1="Leonardo" nome-noivo2="Lucas" tipo="home" />
 
     <main class="pt-24">
       <!-- Header Section -->
