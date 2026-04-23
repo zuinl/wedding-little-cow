@@ -2,6 +2,10 @@
 import { ref } from 'vue'
 import Cabecalho from './components/Cabecalho.vue'
 import DrawerNoivos from './components/DrawerNoivos.vue'
+import ObjetivoPrivado from './components/ObjetivoPrivado.vue'
+import FormularioEvento from './components/FormularioEvento.vue'
+import FormularioNovoObjetivo from './components/FormularioNovoObjetivo.vue'
+import { Heart, Plane } from '@lucide/vue'
 
 const menuAtivo = ref('Evento')
 const nomeNoivo1 = ref('Leonardo')
@@ -10,8 +14,42 @@ const dataEvento = ref('2026-06-10')
 const localEvento = ref('Pizza do Conde')
 const saudacao = ref('As we embark on this new chapter of our lives together, your presence at our wedding is the greatest gift we could ask for. Should you wish to honor us with a contribution towards our future together, we have curated a selection of experiences and goals that mean the world to us.')
 
+const objetivosPrivados = ref([
+  {
+    id: 1,
+    titulo: 'Luna de Mel',
+    descricao: 'Ajude-nos a realizar nosso sonho de uma lua de mel inesquecível em um paraíso tropical.',
+    icone: Heart,
+    objetivo: 10000,
+    atual: 5500,
+  },
+  {
+    id: 2,
+    titulo: 'Casa Própria',
+    descricao: 'Sua contribuição nos ajudará a dar um passo em direção ao nosso próprio lar.',
+    icone: Plane,
+    objetivo: 25000,
+    atual: 8200,
+  },
+])
+
 const selecionarMenu = (menu: string) => {
   menuAtivo.value = menu
+}
+
+const excluirObjetivoPrivado = (id: number) => {
+  const index = objetivosPrivados.value.findIndex(obj => obj.id === id)
+  if (index > -1) {
+    objetivosPrivados.value.splice(index, 1)
+  }
+}
+
+const salvarEvento = () => {
+  console.log('Evento salvo')
+}
+
+const criarNovoObjetivo = () => {
+  console.log('Novo objetivo criado')
 }
 </script>
 
@@ -30,97 +68,48 @@ const selecionarMenu = (menu: string) => {
 
     <main class="pt-32 pb-12">
       <div class="max-w-2xl mx-auto px-8">
-        <h1 class="text-4xl font-serif text-center mb-12 text-[#7f535c]">Painel de Administração</h1>
-
         <!-- Seção Evento -->
-        <div v-if="menuAtivo === 'Evento'" class="bg-white rounded-lg p-8 border border-[#efe0ce]">
-          <form class="space-y-6">
-            <!-- Nome Noivo 1 -->
-            <div>
-              <label for="nomeNoivo1" class="block text-sm font-medium text-[#685e4f] mb-2">
-                Nome do Noivo 1
-              </label>
-              <input
-                id="nomeNoivo1"
-                v-model="nomeNoivo1"
-                type="text"
-                class="w-full px-4 py-3 border border-[#efe0ce] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7f535c] focus:border-transparent"
-              />
-            </div>
-
-            <!-- Nome Noivo 2 -->
-            <div>
-              <label for="nomeNoivo2" class="block text-sm font-medium text-[#685e4f] mb-2">
-                Nome do Noivo 2
-              </label>
-              <input
-                id="nomeNoivo2"
-                v-model="nomeNoivo2"
-                type="text"
-                class="w-full px-4 py-3 border border-[#efe0ce] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7f535c] focus:border-transparent"
-              />
-            </div>
-
-            <!-- Data do Evento -->
-            <div>
-              <label for="dataEvento" class="block text-sm font-medium text-[#685e4f] mb-2">
-                Data do Evento
-              </label>
-              <input
-                id="dataEvento"
-                v-model="dataEvento"
-                type="date"
-                class="w-full px-4 py-3 border border-[#efe0ce] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7f535c] focus:border-transparent"
-              />
-            </div>
-
-            <!-- Local do Evento -->
-            <div>
-              <label for="localEvento" class="block text-sm font-medium text-[#685e4f] mb-2">
-                Local do Evento
-              </label>
-              <input
-                id="localEvento"
-                v-model="localEvento"
-                type="text"
-                class="w-full px-4 py-3 border border-[#efe0ce] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7f535c] focus:border-transparent"
-              />
-            </div>
-
-            <!-- Mensagem de Saudação -->
-            <div>
-              <label for="saudacao" class="block text-sm font-medium text-[#685e4f] mb-2">
-                Mensagem de Saudação
-              </label>
-              <textarea
-                id="saudacao"
-                v-model="saudacao"
-                rows="5"
-                class="w-full px-4 py-3 border border-[#efe0ce] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7f535c] focus:border-transparent resize-none"
-              ></textarea>
-            </div>
-
-            <!-- Botão de Salvar -->
-            <div class="pt-4">
-              <button
-                type="button"
-                class="w-full bg-gradient-to-br from-[#7f535c] to-[#714750] text-[#fff7f7] py-3 px-8 rounded-full font-medium tracking-wide text-center active:scale-95 transition-all">
-                Salvar
-              </button>
-            </div>
-          </form>
+        <div v-if="menuAtivo === 'Evento'">
+          <FormularioEvento
+            :nome-noivo1="nomeNoivo1"
+            :nome-noivo2="nomeNoivo2"
+            :data-evento="dataEvento"
+            :local-evento="localEvento"
+            :saudacao="saudacao"
+            @update:nome-noivo1="nomeNoivo1 = $event"
+            @update:nome-noivo2="nomeNoivo2 = $event"
+            @update:data-evento="dataEvento = $event"
+            @update:local-evento="localEvento = $event"
+            @update:saudacao="saudacao = $event"
+            @salvar="salvarEvento"
+          />>
         </div>
-
         <!-- Seção Novo objetivo -->
         <div v-else-if="menuAtivo === 'Novo objetivo'" class="bg-white rounded-lg p-8 border border-[#efe0ce]">
           <h2 class="text-2xl font-serif text-[#7f535c] mb-6">Criar Novo Objetivo</h2>
-          <p class="text-[#685e4f]">Conteúdo para criar novo objetivo será adicionado aqui.</p>
+          <FormularioNovoObjetivo
+            @salvar="criarNovoObjetivo"
+          />
         </div>
 
         <!-- Seção Ver objetivos -->
-        <div v-else-if="menuAtivo === 'Ver objetivos'" class="bg-white rounded-lg p-8 border border-[#efe0ce]">
-          <h2 class="text-2xl font-serif text-[#7f535c] mb-6">Objetivos</h2>
-          <p class="text-[#685e4f]">Lista de objetivos será exibida aqui.</p>
+        <div v-else-if="menuAtivo === 'Ver objetivos'" class="space-y-8">
+          <div class="bg-white rounded-lg p-8 border border-[#efe0ce]">
+            <h2 class="text-2xl font-serif text-[#7f535c] mb-8">Objetivos Privados</h2>
+            <div class="grid grid-cols-1 gap-6">
+              <ObjetivoPrivado
+                v-for="objetivo in objetivosPrivados"
+                :key="objetivo.id"
+                :id="objetivo.id"
+                :titulo="objetivo.titulo"
+                :descricao="objetivo.descricao"
+                :icone="objetivo.icone"
+                :objetivo="objetivo.objetivo"
+                :atual="objetivo.atual"
+                @excluir="excluirObjetivoPrivado"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </main>
