@@ -1,0 +1,1 @@
+export type MenuPainelNoivos = "EVENTO" | "NOVO_OBJETIVO" | "VER_OBJETIVOS"
