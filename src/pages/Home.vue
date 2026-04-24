@@ -6,11 +6,11 @@ import {
   Home,
   Wine
 } from '@lucide/vue';
-import Cabecalho from './components/Cabecalho.vue';
-import CabecalhoEvento from './components/CabecalhoEvento.vue';
-import Rodape from './components/Rodape.vue';
-import SaudacaoEvento from './components/SaudacaoEvento.vue';
-import ObjetivoPublico from './components/ObjetivoPublico.vue';
+import Cabecalho from '@/components/Cabecalho.vue';
+import CabecalhoEvento from '@/components/CabecalhoEvento.vue';
+import Rodape from '@/components/Rodape.vue';
+import SaudacaoEvento from '@/components/SaudacaoEvento.vue';
+import ObjetivoPublico from '@/components/ObjetivoPublico.vue';
 
 const objetivosPublicos = ref([
   {
@@ -53,7 +53,6 @@ const objetivosPublicos = ref([
     <Cabecalho nome-noivo1="Leonardo" nome-noivo2="Lucas" tipo="home" />
 
     <main class="pt-24">
-      <!-- Header Section -->
       <CabecalhoEvento nome-noivo1="Leonardo" nome-noivo2="Lucas" :data-evento="new Date('2026-06-10')"
         local-evento="Pizza do Conde" />
 
@@ -63,7 +62,6 @@ const objetivosPublicos = ref([
         saudacao="As we embark on this new chapter of our lives together, your presence at our wedding is the greatest gift we could ask for. Should you wish to honor us with a contribution towards our future together, we have curated a selection of experiences and goals that mean the world to us."
       />
 
-      <!-- Registry Grid -->
       <section class="px-8 py-24 max-w-7xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <ObjetivoPublico

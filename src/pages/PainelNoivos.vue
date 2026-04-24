@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import Cabecalho from './components/Cabecalho.vue'
-import DrawerNoivos from './components/DrawerNoivos.vue'
-import ObjetivoPrivado from './components/ObjetivoPrivado.vue'
-import FormularioEvento from './components/FormularioEvento.vue'
-import FormularioNovoObjetivo from './components/FormularioNovoObjetivo.vue'
+import Cabecalho from '@/components/Cabecalho.vue'
+import DrawerNoivos from '@/components/DrawerNoivos.vue'
+import ObjetivoPrivado from '@/components/ObjetivoPrivado.vue'
+import FormularioEvento from '@/components/FormularioEvento.vue'
+import FormularioNovoObjetivo from '@/components/FormularioNovoObjetivo.vue'
 import { Heart, Plane } from '@lucide/vue'
 
 const menuAtivo = ref('Evento')

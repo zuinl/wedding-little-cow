@@ -1,19 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from './Home.vue'
-import Login from './Login.vue'
-import PainelNoivos from './PainelNoivos.vue'
+import Home from '@/pages/Home.vue'
+import Login from '@/pages/Login.vue'
+import PainelNoivos from '@/pages/PainelNoivos.vue'
+import { Routes } from '@/types/routes.ts'
 
 const routes = [
   {
-    path: '/',
+    path: Routes.HOME,
     component: Home
   },
   {
-    path: '/login',
+    path: Routes.LOGIN,
     component: Login
   },
   {
-    path: '/painel-noivos',
+    path: Routes.PAINEL_NOIVOS,
     component: PainelNoivos
   }
 ]
