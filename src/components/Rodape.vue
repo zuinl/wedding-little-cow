@@ -1,9 +1,8 @@
 <script setup lang="ts">
+import type { Evento } from '@/types/evento';
 
-defineProps({
-    nomeNoivo1: String,
-    nomeNoivo2: String,
-})
+
+defineProps<Pick<Evento, 'nomeNoivo1' | 'nomeNoivo2'>>()
 </script>
 
 <template>

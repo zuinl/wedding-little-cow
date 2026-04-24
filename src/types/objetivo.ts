@@ -22,7 +22,7 @@ export interface Objetivo {
   /**
    * Identificador do ícone do objetivo
    */
-  icone: IconeObjetivo;
+  icone: keyof typeof IconeObjetivo;
   /**
    * Chave Pix para contribuição. Recomendado uso de chave aleatória.
    */

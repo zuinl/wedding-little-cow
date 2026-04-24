@@ -1,29 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import ModalContribuicao from './ModalContribuicao.vue'
+import { type Objetivo } from '@/types/objetivo'
+import { ICONES } from '@/constants/icones';
+import { formatarMoeda } from '@/utils/formatarMoeda';
+import { calcularLarguraProgresso } from '@/utils/calcularLarguraProgresso';
 
-defineProps<{
-    id: number,
-    titulo: string,
-    descricao: string,
-    icone: Object,
-    objetivo: number,
-    atual: number,
-}>()
+defineProps<Objetivo>()
 
 const isModalOpen = ref(false)
-
-const formatarMoeda = (valor: number) => {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    maximumFractionDigits: 0
-  }).format(valor);
-};
-
-const obterLarguraProgresso = (item: any) => {
-  return `${(item.atual / item.objetivo) * 100}%`;
-};
 
 const abrirModal = () => {
   isModalOpen.value = true
@@ -32,12 +17,13 @@ const abrirModal = () => {
 const fecharModal = () => {
   isModalOpen.value = false
 }
+
 </script>
 
 <template>
     <div class="bg-white rounded-lg p-8 flex flex-col h-full border border-[#efe0ce] hover:bg-[#efe0ce]/10 transition-colors duration-500">
         <div class="w-12 h-12 rounded-full bg-[#fcc3ce] flex items-center justify-center text-[#643c45] mb-6">
-            <component :is="icone" :size="20" />
+            <component :is="ICONES[icone]" :size="20" />
         </div>
 
         <h4 class="text-2xl font-serif mb-4">{{ titulo }}</h4>
@@ -49,13 +35,13 @@ const fecharModal = () => {
                     Progress
                 </span>
                 <span class="font-serif text-lg text-[#7f535c]">
-                    {{ formatarMoeda(atual) }} / {{ formatarMoeda(objetivo) }}
+                    {{ formatarMoeda(atual) }} / {{ formatarMoeda(meta) }}
                 </span>
             </div>
 
             <div class="h-1.5 w-full bg-[#f9ecdc] rounded-full overflow-hidden">
                 <div class="h-full bg-[#7f535c] transition-all duration-1000 ease-out"
-                    :style="{ width: obterLarguraProgresso({ atual, objetivo }) }">
+                    :style="{ width: calcularLarguraProgresso(atual, meta) }">
                 </div>
             </div>
 
