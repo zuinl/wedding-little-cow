@@ -20,6 +20,7 @@ const objetivosPrivados = ref([
     icone: Heart,
     objetivo: 10000,
     atual: 5500,
+    contribuicoes: [{ id: 1, remetente: "Eu", mensagem: "Parabéns!", valor: 5 }]
   },
   {
     id: 2,
@@ -85,6 +86,7 @@ const criarNovoObjetivo = () => {
                 :icone="objetivo.icone"
                 :objetivo="objetivo.objetivo"
                 :atual="objetivo.atual"
+                :contribuicoes="objetivo.contribuicoes"
                 @excluir="excluirObjetivoPrivado"
               />
             </div>
